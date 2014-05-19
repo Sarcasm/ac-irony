@@ -13,8 +13,7 @@ a work of fiction.**
 
 ## Screenshots
 
-![Boost](screenshots/boost-example.png)
-
+TODO: non-misleading screenshot.
 
 ## Dependencies
 
@@ -45,40 +44,17 @@ package manager.
 ## Configuration
 
 ~~~el
-(require 'ac-irony)
-(require 'yasnippet)
-
-(defun my-irony-hook ()
+(defun my-ac-irony-setup ()
   ;; be cautious, if yas is not enabled before (auto-complete-mode 1), overlays
   ;; *may* persist after an expansion.
-  (yas-minor-mode-on)
+  (yas-minor-mode 1)
   (auto-complete-mode 1)
 
-  (ac-irony-enable)
-  (define-key irony-mode-map [(control return)] 'ac-complete-irony))
+  (add-to-list 'ac-sources 'ac-source-irony)
+  (define-key irony-mode-map (kbd "M-RET") 'ac-complete-irony-async))
 
-(add-hook 'irony-mode-hook 'my-irony-hook)
+(add-hook 'irony-mode-hook 'my-ac-irony-setup)
 ~~~
-
-
-## FAQ
-
-__auto-complete acts strangely, it tries to complete inside string literals...__
-
-In order to enable header completion, such as:
-
-```cpp
-#include "heade[COMP]
-```
-
-The `ac` plugin allows `auto-complete` to complete inside string literals in
-`ac-irony-enable`.
-
-```el
-(setq ac-disable-faces (delq 'font-lock-string-face ac-disable-faces))
-```
-
-Please create an issue if you find this unacceptable.
 
 
 [irony-mode-ref]: https://github.com/Sarcasm/irony-mode          "Irony Mode"
