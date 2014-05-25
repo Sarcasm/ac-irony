@@ -65,11 +65,11 @@
 ;;;###autoload
 (defun ac-complete-irony-async ()
   (interactive)
-  (irony-completion-candidates-at-point-async 'ac-complete-irony))
+  (irony-completion-candidates-async 'ac-complete-irony))
 
 (defun ac-irony-prefix ()
   ;; do not return a valid prefix until we have the candidates
-  (when (irony-completion-candidates-at-point)
+  (when (irony-completion-candidates-available-p)
     (irony-completion--beginning-of-symbol)))
 
 (defun ac-irony--make-candidate (candidate)
@@ -89,8 +89,7 @@
                 (concat "\n" it "\n")))))
 
 (defun ac-irony-candidates ()
-  (mapcar #'ac-irony--make-candidate (irony-completion-candidates-at-point)))
+  (mapcar #'ac-irony--make-candidate (irony-completion-candidates)))
 
 (provide 'ac-irony)
-
 ;;; ac-irony.el ends here
