@@ -70,7 +70,7 @@
 (defun ac-irony-prefix ()
   ;; do not return a valid prefix until we have the candidates
   (when (irony-completion-candidates-available-p)
-    (irony-completion--beginning-of-symbol)))
+    (irony-completion-beginning-of-symbol)))
 
 (defun ac-irony--make-candidate (candidate)
   (popup-make-item
